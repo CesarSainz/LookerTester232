@@ -72,8 +72,8 @@ view: users {
 
   dimension: state {
     type: string
-    sql: CASE WHEN {% parameter select_dimension %} = ${TABLE}.state
-    ELSE ${TABLE}.gender END;;
+    sql: CASE WHEN {% parameter select_dimension %} = "state"
+    ELSE "gender" END;;
   }
 
   dimension: zip {
