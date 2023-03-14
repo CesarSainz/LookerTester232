@@ -38,6 +38,18 @@ view: users {
     sql: ${TABLE}.created_at ;;
   }
 
+  parameter: select_dimension {
+    allowed_value: {
+      label: "State"
+      value: "state"
+    }
+
+    allowed_value: {
+      label: "Gender"
+      value: "gender"
+    }
+  }
+
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
@@ -60,7 +72,8 @@ view: users {
 
   dimension: state {
     type: string
-    sql: ${TABLE}.state ;;
+    sql: CASE WHEN {% parameter select_dimension %} = "state".state
+    ELSE ${TABLE}.gender END;;
   }
 
   dimension: zip {
